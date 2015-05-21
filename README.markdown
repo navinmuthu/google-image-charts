@@ -4,7 +4,7 @@ Ruby library for interfacing with Google's Image Chart API. (Part of the Google 
 
 Google Image Charts allows a user to enter series data into a query string and retrieve a PNG or SVG image graph. See [http://code.google.com/apis/chart/image/](http://code.google.com/apis/chart/image/) for more information.
 
-Right now only Line Graphs and Pie Charts are supported. Let me know if you would like to contribute!
+Right now only Line Graphs, Pie Charts, and Bar Graphs are supported. Let me know if you would like to contribute!
 
 ## Installation
 
