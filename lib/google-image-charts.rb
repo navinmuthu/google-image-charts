@@ -127,6 +127,7 @@ module GoogleImageCharts
   # Load all the chart types
   require 'GoogleImageCharts/line-graph.rb'
   require 'GoogleImageCharts/pie-chart.rb'
+  require 'GoogleImageCharts/bar-chart.rb'
   
 end
 
