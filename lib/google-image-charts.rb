@@ -3,7 +3,8 @@ require 'uri'
 module GoogleImageCharts  
   
   class ChartBase
-    attr_accessor :chartTitle, :chartWidth, :chartHeight, :chartLabels, :chartColors, :additionalChartOptions, :usePost
+    attr_accessor :chartTitle, :chartWidth, :chartHeight, :chartLabels,
+      :chartColors, :additionalChartOptions, :usePost, :chartSeriesCount
     
     CHART_URI_BASE = "http://chart.apis.google.com/chart?"
     
@@ -14,6 +15,7 @@ module GoogleImageCharts
       @chartHeight  = chartOptionsHash[:height]
       @chartTitle   = chartOptionsHash[:title]
       self.chartData=(chartOptionsHash[:data])  # Should be an array of data arrays
+      @chartSeriesCount = chartOptionsHash[:series_count]
       
       @chartLabels  = chartOptionsHash[:labels]  # Should be an array of labels
       @chartLabelPosition  = "b" if chartOptionsHash[:labels].nil? == false
@@ -72,7 +74,7 @@ module GoogleImageCharts
       chartURL = CHART_URI_BASE
       chartURL = chartURL + "cht="    + @chartType
       chartURL = chartURL + "&chs="   + @chartWidth.to_s + "x" + @chartHeight.to_s 
-      chartURL = chartURL + "&chd=t:" + chartDataFlattened if @chartData.nil? == false # Simple text for now
+      chartURL = chartURL + "&chd=t#{@chartSeriesCount}:" + chartDataFlattened if @chartData.nil? == false # Simple text for now
       chartURL = chartURL + "&chdl="  + @chartLabels.join("|")  if @chartLabels.nil? == false
       chartURL = chartURL + "&chdlp="  + @chartLabelPosition    if @chartLabels.nil? == false
       chartURL = chartURL + "&chtt="  + @chartTitle             if @chartTitle.nil? == false
@@ -94,7 +96,7 @@ module GoogleImageCharts
         "chs" => @chartWidth.to_s + "x" + @chartHeight.to_s
       }
       
-      dataHash.merge!( (@chartData.nil? == false) ? {"chd" => "t:#{chartDataFlattened.to_s}" } : {} )
+      dataHash.merge!( (@chartData.nil? == false) ? {"chd" => "t#{@chartSeriesCount}:#{chartDataFlattened.to_s}" } : {} )
       dataHash.merge!( (@chartLabels.nil? == false) ? {"chdl" => @chartLabels.join("|").to_s } : {} )
       dataHash.merge!( (@chartLabels.nil? == false) ? {"chdlp" => @chartLabelPosition } : {}        )
       dataHash.merge!( (@chartTitle.nil? == false) ? {"chtt" => @chartTitle } : {}                 )
