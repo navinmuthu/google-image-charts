@@ -8,5 +8,4 @@ Gem::Specification.new do |s|
   s.email       = 'cbrito@gmail.com'
   s.files       = ["lib/google-image-charts.rb"]
   s.homepage    = 'http://github.com/cbrito/google-image-charts'
-  s.documentation = 'http://github.com/cbrito/google-image-charts'
 end
